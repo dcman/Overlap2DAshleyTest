@@ -1,12 +1,12 @@
 
 pack.png
-size: 128,1024
+size: 512,1024
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
 Ball
   rotate: false
-  xy: 24, 716
+  xy: 24, 694
   size: 87, 86
   orig: 87, 86
   offset: 0, 0
@@ -16,5 +16,19 @@ Bar
   xy: 2, 2
   size: 20, 800
   orig: 20, 800
+  offset: 0, 0
+  index: -1
+b-bar
+  rotate: false
+  xy: 24, 782
+  size: 480, 20
+  orig: 480, 20
+  offset: 0, 0
+  index: -1
+grass4
+  rotate: false
+  xy: 24, 657
+  size: 38, 35
+  orig: 38, 35
   offset: 0, 0
   index: -1
