@@ -6,14 +6,13 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.uwsoft.editor.renderer.SceneLoader;
 import com.uwsoft.editor.renderer.components.TransformComponent;
+import com.uwsoft.editor.renderer.data.CompositeItemVO;
 import com.uwsoft.editor.renderer.utils.ItemWrapper;
 
 
@@ -35,7 +34,6 @@ public class AshleyTest extends ApplicationAdapter {
         sceneLoader.loadScene("MainScene", viewport);
         renderer = new Box2DDebugRenderer();
         world = sceneLoader.world;
-        world.setGravity(new Vector2(0f,-9.8f));
         engine = sceneLoader.engine;
         root = new ItemWrapper(sceneLoader.getRoot());
         player = root.getChild("ball");
@@ -46,17 +44,18 @@ public class AshleyTest extends ApplicationAdapter {
 
     private void init() {
         player.addScript(new PlayerScript(world));
-        createLef();
+        createBurst();
     }
 
-    private void createLef(){
+    private void createBurst(){
         //TODO clean this up
-        Entity e = sceneLoader.entityFactory.createEntity(sceneLoader.rootEntity, sceneLoader.getRm().getProjectVO().libraryItems.get("lef"));
+        CompositeItemVO vo = sceneLoader.getRm().getProjectVO().libraryItems.get("burster");
+        Entity e = sceneLoader.entityFactory.createEntity(root.getEntity(), vo);
         e.getComponent(TransformComponent.class).x = 200;
-        e.getComponent(TransformComponent.class).y = 200;
+        e.getComponent(TransformComponent.class).y = 800;
         engine.addEntity(e);
         lef = new ItemWrapper(e);
-        lef.addScript(new LefScript(world));
+        lef.addScript(new BusterScript(world));
         //Json j = new Json();
         //System.out.println(j.prettyPrint(j.toJson(sceneLoader.getRm().getProjectVO().libraryItems.get("lef"))));
     }
@@ -67,7 +66,6 @@ public class AshleyTest extends ApplicationAdapter {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         sceneLoader.getEngine().update(Gdx.graphics.getDeltaTime());
         renderer.render(world, viewport.getCamera().combined);
-        world.step(1 / 60f, 8, 3);
         engine.update(delta);
     }
 }

@@ -16,7 +16,7 @@ import com.uwsoft.editor.renderer.utils.ComponentRetriever;
 /**
  * Created by SuckIt on 9/15/15.
  */
-public class LefScript implements IScript {
+public class BusterScript implements IScript {
     private final World world;
     private Entity entity;
     private TransformComponent transformComponent;
@@ -24,12 +24,12 @@ public class LefScript implements IScript {
     private PhysicsBodyComponent physicsBodyComponent;
     private ImageComponent imageComponent;
     private TextureAtlas a = new TextureAtlas("orig/pack.atlas");
-    private TextureRegion r = a.findRegion("grass4");
+    private TextureRegion r = a.findRegion("exp");
     private SpriteBatch batch = new SpriteBatch();
     private Vector2 pos;
     private boolean test = true;
 
-    public LefScript(World world) {
+    public BusterScript(World world) {
         this.world = world;
         imageComponent = new ImageComponent();
 
