@@ -4,6 +4,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
+import com.fancylancy.ashleytest.Store;
 import com.fancylancy.ashleytest.comps.CirclePhysicsBodyComponent;
 import com.uwsoft.editor.renderer.components.DimensionsComponent;
 import com.uwsoft.editor.renderer.components.MainItemComponent;
@@ -26,6 +27,8 @@ public class PlayerScript implements IScript {
     private Texture image;
     private Vector2 position;
     private int width;
+    private float scale = Store.physicsScale;
+
 
     public PlayerScript(World world) {
         this.world = world;
@@ -37,12 +40,12 @@ public class PlayerScript implements IScript {
         transformComponent = ComponentRetriever.get(entity, TransformComponent.class);
         dimensionsComponent = ComponentRetriever.get(entity, DimensionsComponent.class);
         textureRegionComponent = ComponentRetriever.get(entity, TextureRegionComponent.class);
-        mainItemComponent = ComponentRetriever.get(entity,MainItemComponent.class);
+        mainItemComponent = ComponentRetriever.get(entity, MainItemComponent.class);
         width = textureRegionComponent.region.getRegionWidth();
         position = new Vector2(transformComponent.x,transformComponent.y);
         image = textureRegionComponent.region.getTexture();
         entity.add(new CirclePhysicsBodyComponent(world, position, width));
-        System.out.println(entity.getComponents());
+        //System.out.println(entity.getComponents());
         circlePhysicsBodyComponent = entity.getComponent(CirclePhysicsBodyComponent.class);
         //mainItemComponent.visible = false;
 
@@ -50,8 +53,8 @@ public class PlayerScript implements IScript {
 
     @Override
     public void act(float delta) {
-        transformComponent.x = (circlePhysicsBodyComponent.getPositionX() / 0.05f) - width / 2;
-        transformComponent.y = (circlePhysicsBodyComponent.getPositionY() / 0.05f) - width / 2;
+        transformComponent.x = (circlePhysicsBodyComponent.getPositionX() / scale) - width / 2;
+        transformComponent.y = (circlePhysicsBodyComponent.getPositionY() / scale) - width / 2;
     }
 
     @Override

@@ -19,7 +19,6 @@ public class AshleyTest extends ApplicationAdapter {
     private Engine engine;
     private SceneLoader sceneLoader;
     private ItemWrapper root, player;
-    private float delta;
     private FitViewport viewport;
     private Store store;
 
@@ -38,10 +37,12 @@ public class AshleyTest extends ApplicationAdapter {
         engine = store.engine;
         System.out.println(engine);
         root = new ItemWrapper(sceneLoader.getRoot());
+        Store.getInstance().root = root;
         System.out.println(root);
         player = root.getChild("ball");
         System.out.println(player);
-        delta = store.delta;
+        store.player = player;
+        world.setContactListener(new Contact(engine));
         init();
     }
 

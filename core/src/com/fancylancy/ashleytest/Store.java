@@ -2,7 +2,6 @@ package com.fancylancy.ashleytest;
 
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
@@ -19,14 +18,16 @@ import com.uwsoft.editor.renderer.utils.ItemWrapper;
  */
 public class Store extends AssetManager implements Disposable {
     private static Store ourInstance = new Store();
+    public static float physicsScale = 0.05f;
     public Box2DDebugRenderer renderer;
     public String scene = "MainScene";
     public World world;
     public Engine engine;
     public SceneLoader sceneLoader;
     public ItemWrapper player, buster;
-    public float delta;
     public FitViewport viewport;
+    public int score = 0;
+    public ItemWrapper root;
 
     public static Store getInstance() {
         return ourInstance;
@@ -38,7 +39,7 @@ public class Store extends AssetManager implements Disposable {
         renderer = new Box2DDebugRenderer();
         sceneLoader.loadScene(scene, viewport);
         engine = sceneLoader.engine;
-        delta = Gdx.graphics.getDeltaTime();
+
     }
 
     @Override

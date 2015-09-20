@@ -1,15 +1,17 @@
 package com.fancylancy.ashleytest.scripts;
 
 import com.badlogic.ashley.core.Entity;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.utils.Json;
+import com.fancylancy.ashleytest.Store;
 import com.fancylancy.ashleytest.comps.ImageComponent;
 import com.uwsoft.editor.renderer.components.*;
 import com.uwsoft.editor.renderer.components.physics.PhysicsBodyComponent;
 import com.uwsoft.editor.renderer.scripts.IScript;
 import com.uwsoft.editor.renderer.utils.ComponentRetriever;
+
 
 /**
  * Created by SuckIt on 9/15/15.
@@ -23,8 +25,9 @@ public class BusterScript implements IScript {
     private ParentNodeComponent parentNodeComponent;
     private ImageComponent imageComponent;
     private String atlas, region;
-    private SpriteBatch batch = new SpriteBatch();
+    private Batch batch = Store.getInstance().sceneLoader.getBatch();
     private Vector2 pos;
+    private float scale = Store.physicsScale;
     private boolean test = true;
 
     public BusterScript(World world) {
@@ -41,20 +44,26 @@ public class BusterScript implements IScript {
         this.entity = entity;
         physicsBodyComponent = ComponentRetriever.get(entity,PhysicsBodyComponent.class);
         parentNodeComponent = ComponentRetriever.get(entity,ParentNodeComponent.class);
-        System.out.println(parentNodeComponent.parentEntity.getComponents());
+        //System.out.println(parentNodeComponent.parentEntity.getComponents());
+
     }
 
     @Override
     public void act(float delta) {
         pos = physicsBodyComponent.body.getPosition();
         if(test){
-            Json j = new Json();
             for (int i = 0; i < physicsBodyComponent.body.getFixtureList().size; i++) {
                 physicsBodyComponent.body.getFixtureList().get(i).setSensor(true);
-
+                Fixture fx = physicsBodyComponent.body.getFixtureList().get(i);
+                fx.setUserData("Buster");
             }
+            physicsBodyComponent.body.setUserData("Buster");
+            System.out.println(physicsBodyComponent.body.getUserData());
             test = false;
         }
+        batch.begin();
+        batch.draw(imageComponent.region,pos.x / scale,pos.y / scale);
+        batch.end();
     }
 
     @Override
