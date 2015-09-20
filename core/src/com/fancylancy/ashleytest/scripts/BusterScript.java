@@ -57,8 +57,6 @@ public class BusterScript implements IScript {
                 Fixture fx = physicsBodyComponent.body.getFixtureList().get(i);
                 fx.setUserData("Buster");
             }
-            physicsBodyComponent.body.setUserData("Buster");
-            System.out.println(physicsBodyComponent.body.getUserData());
             test = false;
         }
         batch.begin();
