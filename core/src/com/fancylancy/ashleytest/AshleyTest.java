@@ -2,70 +2,59 @@ package com.fancylancy.ashleytest;
 
 
 import com.badlogic.ashley.core.Engine;
-import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.badlogic.gdx.utils.viewport.Viewport;
-import com.uwsoft.editor.renderer.SceneLoader;
-import com.uwsoft.editor.renderer.components.TransformComponent;
-import com.uwsoft.editor.renderer.data.CompositeItemVO;
+import com.fancylancy.ashleytest.scripts.PlayerScript;
 import com.uwsoft.editor.renderer.utils.ItemWrapper;
+import com.uwsoft.editor.renderer.SceneLoader;
 
 
 public class AshleyTest extends ApplicationAdapter {
-
-    private SceneLoader sceneLoader;
-    private Viewport viewport;
     private Box2DDebugRenderer renderer;
     private World world;
     private Engine engine;
-    private ItemWrapper root, player, lef;
+    private SceneLoader sceneLoader;
+    private ItemWrapper root, player;
     private float delta;
-    private uistage uistage;
+    private FitViewport viewport;
+    private Store store;
 
     @Override
 	public void create () {
-        viewport = new FitViewport(480, 800);
-        sceneLoader = new SceneLoader();
-        sceneLoader.loadScene("MainScene", viewport);
-        renderer = new Box2DDebugRenderer();
+        store = Store.getInstance();
+        System.out.println(store);
+        sceneLoader = store.sceneLoader;
+        System.out.println(sceneLoader);
+        viewport = store.viewport;
+        System.out.println(viewport);
+        renderer = store.renderer;
+        System.out.println(renderer);
         world = sceneLoader.world;
-        engine = sceneLoader.engine;
+        System.out.println(world);
+        engine = store.engine;
+        System.out.println(engine);
         root = new ItemWrapper(sceneLoader.getRoot());
+        System.out.println(root);
         player = root.getChild("ball");
-        sceneLoader.getRm();
-        delta = Gdx.graphics.getDeltaTime();
+        System.out.println(player);
+        delta = store.delta;
         init();
     }
 
     private void init() {
         player.addScript(new PlayerScript(world));
-        createBurst();
-    }
-
-    private void createBurst(){
-        //TODO clean this up
-        CompositeItemVO vo = sceneLoader.getRm().getProjectVO().libraryItems.get("burster");
-        Entity e = sceneLoader.entityFactory.createEntity(root.getEntity(), vo);
-        e.getComponent(TransformComponent.class).x = 200;
-        e.getComponent(TransformComponent.class).y = 800;
-        engine.addEntity(e);
-        lef = new ItemWrapper(e);
-        lef.addScript(new BusterScript(world));
-        //Json j = new Json();
-        //System.out.println(j.prettyPrint(j.toJson(sceneLoader.getRm().getProjectVO().libraryItems.get("lef"))));
+        store.createBurst(root);
     }
 
     @Override
-	public void render () {
+    public void render () {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         sceneLoader.getEngine().update(Gdx.graphics.getDeltaTime());
         renderer.render(world, viewport.getCamera().combined);
-        engine.update(delta);
     }
 }

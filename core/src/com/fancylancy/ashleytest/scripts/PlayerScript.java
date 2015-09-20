@@ -1,10 +1,10 @@
-package com.fancylancy.ashleytest;
+package com.fancylancy.ashleytest.scripts;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.utils.Json;
+import com.fancylancy.ashleytest.comps.CirclePhysicsBodyComponent;
 import com.uwsoft.editor.renderer.components.DimensionsComponent;
 import com.uwsoft.editor.renderer.components.MainItemComponent;
 import com.uwsoft.editor.renderer.components.TextureRegionComponent;
