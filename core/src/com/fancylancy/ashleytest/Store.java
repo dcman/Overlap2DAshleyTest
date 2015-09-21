@@ -41,7 +41,6 @@ public class Store extends AssetManager implements Disposable {
         renderer = new Box2DDebugRenderer();
         sceneLoader.loadScene(scene, viewport);
         engine = sceneLoader.engine;
-
     }
 
     @Override
