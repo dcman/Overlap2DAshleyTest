@@ -10,7 +10,6 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.fancylancy.ashleytest.scripts.PlayerScript;
-import com.uwsoft.editor.renderer.scripts.IScript;
 import com.uwsoft.editor.renderer.utils.ItemWrapper;
 import com.uwsoft.editor.renderer.SceneLoader;
 

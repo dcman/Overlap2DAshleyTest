@@ -29,11 +29,12 @@ public class CirclePhysicsBodyComponent implements Component {
         bodyDef.type = BodyDef.BodyType.DynamicBody;
         body = world.createBody(bodyDef);
         fixture = new FixtureDef();
-        fixture.isSensor = false;
         fixture.shape = circleShape;
-        fixture.density = 1;
-        fixture.restitution = 1;
-        Fixture fix =body.createFixture(fixture);
+        fixture.restitution = 0.00001f;
+        fixture.density = 1f;
+        fixture.friction = 1f;
+        fixture.isSensor = false;
+        Fixture fix = body.createFixture(fixture);
         fix.setUserData("Ball");
         circleShape.dispose();
     }

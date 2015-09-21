@@ -1,7 +1,7 @@
 package com.fancylancy.ashleytest.scripts;
 
 import com.badlogic.ashley.core.Entity;
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.fancylancy.ashleytest.Store;
@@ -24,10 +24,10 @@ public class PlayerScript implements IScript {
     private MainItemComponent mainItemComponent;
     private Entity entity;
     private World world;
-    private Texture image;
     private Vector2 position;
     private int width;
     private float scale = Store.physicsScale;
+    private Batch batch;
 
 
     public PlayerScript(World world) {
@@ -43,11 +43,10 @@ public class PlayerScript implements IScript {
         mainItemComponent = ComponentRetriever.get(entity, MainItemComponent.class);
         width = textureRegionComponent.region.getRegionWidth();
         position = new Vector2(transformComponent.x,transformComponent.y);
-        image = textureRegionComponent.region.getTexture();
         entity.add(new CirclePhysicsBodyComponent(world, position, width));
         //System.out.println(entity.getComponents());
         circlePhysicsBodyComponent = entity.getComponent(CirclePhysicsBodyComponent.class);
-        //mainItemComponent.visible = false;
+        batch = Store.getInstance().sceneLoader.getBatch();
 
     }
 
@@ -55,7 +54,8 @@ public class PlayerScript implements IScript {
     public void act(float delta) {
         transformComponent.x = (circlePhysicsBodyComponent.getPositionX() / scale) - width / 2;
         transformComponent.y = (circlePhysicsBodyComponent.getPositionY() / scale) - width / 2;
-
+        batch.begin();
+        batch.end();
     }
 
     @Override
@@ -67,13 +67,13 @@ public class PlayerScript implements IScript {
         float temp = 0f;
         if (screenX < 190){
             temp = screenX % 240;
-            temp = temp * 100;
+            temp = 240 - temp;
         }
         if (screenX > 290){
-            temp = -screenX % 240;
-            temp = temp * 100;
+            temp = screenX % 240;
+            temp = temp * -1;
         }
         System.out.println("Screen x " + screenX + " Force " + temp);
-        circlePhysicsBodyComponent.body.applyForceToCenter(temp,5000,true);
+        circlePhysicsBodyComponent.body.applyForceToCenter(temp,7500,true);
     }
 }
