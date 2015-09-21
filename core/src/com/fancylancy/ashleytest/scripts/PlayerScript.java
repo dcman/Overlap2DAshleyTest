@@ -55,10 +55,25 @@ public class PlayerScript implements IScript {
     public void act(float delta) {
         transformComponent.x = (circlePhysicsBodyComponent.getPositionX() / scale) - width / 2;
         transformComponent.y = (circlePhysicsBodyComponent.getPositionY() / scale) - width / 2;
+
     }
 
     @Override
     public void dispose() {
 
+    }
+
+    public void applyForce(int screenX) {
+        float temp = 0f;
+        if (screenX < 190){
+            temp = screenX % 240;
+            temp = temp * 100;
+        }
+        if (screenX > 290){
+            temp = -screenX % 240;
+            temp = temp * 100;
+        }
+        System.out.println("Screen x " + screenX + " Force " + temp);
+        circlePhysicsBodyComponent.body.applyForceToCenter(temp,5000,true);
     }
 }

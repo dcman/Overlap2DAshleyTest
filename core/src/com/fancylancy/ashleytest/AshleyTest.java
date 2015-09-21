@@ -10,6 +10,7 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.fancylancy.ashleytest.scripts.PlayerScript;
+import com.uwsoft.editor.renderer.scripts.IScript;
 import com.uwsoft.editor.renderer.utils.ItemWrapper;
 import com.uwsoft.editor.renderer.SceneLoader;
 
@@ -25,6 +26,7 @@ public class AshleyTest extends ApplicationAdapter {
     private float timeState;
     private FPSLogger fpsLogger;
     private uiStage uiStage;
+    private PlayerScript playerScript;
 
     @Override
 	public void create () {
@@ -48,13 +50,14 @@ public class AshleyTest extends ApplicationAdapter {
         System.out.println(player);
         store.player = player;
         world.setContactListener(new Contact(engine));
-        uiStage = new uiStage(viewport,sceneLoader.getBatch());
+        playerScript = new PlayerScript(world);
+        uiStage = new uiStage(viewport, sceneLoader.getBatch(), playerScript);
         init();
     }
 
     private void init() {
         Gdx.input.setInputProcessor(uiStage);
-        player.addScript(new PlayerScript(world));
+        player.addScript(playerScript);
     }
     public void addRandom(){
         timeState+=Gdx.graphics.getDeltaTime();

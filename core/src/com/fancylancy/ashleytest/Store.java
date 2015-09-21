@@ -9,10 +9,12 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.fancylancy.ashleytest.scripts.BusterScript;
+import com.fancylancy.ashleytest.scripts.PlayerScript;
 import com.fancylancy.ashleytest.scripts.StarScript;
 import com.uwsoft.editor.renderer.SceneLoader;
 import com.uwsoft.editor.renderer.components.TransformComponent;
 import com.uwsoft.editor.renderer.data.CompositeItemVO;
+import com.uwsoft.editor.renderer.scripts.IScript;
 import com.uwsoft.editor.renderer.utils.ItemWrapper;
 
 /**
@@ -30,6 +32,7 @@ public class Store extends AssetManager implements Disposable {
     public FitViewport viewport;
     public int score = 0;
     public ItemWrapper root;
+    public PlayerScript playerScript;
 
     public static Store getInstance() {
         return ourInstance;
