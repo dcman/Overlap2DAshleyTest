@@ -49,12 +49,11 @@ public class AshleyTest extends ApplicationAdapter {
 
     private void init() {
         player.addScript(new PlayerScript(world));
-        store.createBurst(root);
     }
-    public void addBuster (){
+    public void addRandom(){
         timeState+=Gdx.graphics.getDeltaTime();
-        if(timeState>=10f){
-            store.createBurst(root);
+        if(timeState>=3f){
+            store.add(root);
             timeState=0f; // reset our timer
         }
 
@@ -64,7 +63,7 @@ public class AshleyTest extends ApplicationAdapter {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         sceneLoader.getEngine().update(Gdx.graphics.getDeltaTime());
-        renderer.render(world, viewport.getCamera().combined);
-        addBuster();
+       // renderer.render(world, viewport.getCamera().combined);
+        addRandom();
     }
 }

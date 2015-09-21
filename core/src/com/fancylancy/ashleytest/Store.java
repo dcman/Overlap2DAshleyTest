@@ -3,11 +3,13 @@ package com.fancylancy.ashleytest;
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.fancylancy.ashleytest.scripts.BusterScript;
+import com.fancylancy.ashleytest.scripts.StarScript;
 import com.uwsoft.editor.renderer.SceneLoader;
 import com.uwsoft.editor.renderer.components.TransformComponent;
 import com.uwsoft.editor.renderer.data.CompositeItemVO;
@@ -24,7 +26,7 @@ public class Store extends AssetManager implements Disposable {
     public World world;
     public Engine engine;
     public SceneLoader sceneLoader;
-    public ItemWrapper player, buster;
+    public ItemWrapper player, buster, star;
     public FitViewport viewport;
     public int score = 0;
     public ItemWrapper root;
@@ -55,5 +57,25 @@ public class Store extends AssetManager implements Disposable {
         engine.addEntity(e);
         buster = new ItemWrapper(e);
         buster.addScript(new BusterScript(world));
+    }
+
+    public void createStar(ItemWrapper root) {
+        CompositeItemVO vo = sceneLoader.getRm().getProjectVO().libraryItems.get("star");
+        Entity e = sceneLoader.entityFactory.createEntity(root.getEntity(), vo);
+        e.getComponent(TransformComponent.class).x = 250;
+        e.getComponent(TransformComponent.class).y = 850;
+        engine.addEntity(e);
+        star = new ItemWrapper(e);
+        star.addScript(new StarScript(world));
+    }
+
+    public void add(ItemWrapper root) {
+        int temp = MathUtils.random(0,1);
+        if (temp == 0){
+            createBurst(root);
+        }
+        else {
+            createStar(root);
+        }
     }
 }

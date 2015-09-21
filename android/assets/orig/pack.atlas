@@ -25,6 +25,13 @@ exp
   orig: 72, 71
   offset: 0, 0
   index: -1
+star
+  rotate: false
+  xy: 113, 734
+  size: 48, 46
+  orig: 48, 46
+  offset: 0, 0
+  index: -1
 sun
   rotate: false
   xy: 24, 694
