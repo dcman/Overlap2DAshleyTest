@@ -68,12 +68,12 @@ public class PlayerScript implements IScript {
         if (screenX < 190){
             temp = screenX % 240;
             temp = 240 - temp;
-            temp *= 100;
+            temp *= 50;
         }
         if (screenX > 290){
             temp = screenX % 240;
             temp = temp * -1;
-            temp *= 100;
+            temp *= 50;
         }
         System.out.println("Screen x " + screenX + " Force " + temp);
         circlePhysicsBodyComponent.body.applyForceToCenter(temp, 5000, true);

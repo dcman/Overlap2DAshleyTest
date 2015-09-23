@@ -30,9 +30,9 @@ public class CirclePhysicsBodyComponent implements Component {
         body = world.createBody(bodyDef);
         fixture = new FixtureDef();
         fixture.shape = circleShape;
-        fixture.restitution = 0.00001f;
+        fixture.restitution = 0.2f;
         fixture.density = 1f;
-        fixture.friction = 1f;
+        fixture.friction = 0.1f;
         fixture.isSensor = false;
         Fixture fix = body.createFixture(fixture);
         fix.setUserData("Ball");
