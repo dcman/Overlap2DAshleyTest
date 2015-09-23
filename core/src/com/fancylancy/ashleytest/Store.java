@@ -21,6 +21,7 @@ import com.uwsoft.editor.renderer.utils.ItemWrapper;
  * Created by SuckIt on 9/20/15.
  */
 public class Store extends AssetManager implements Disposable {
+    private final String tag = this.getClass().getSimpleName();
     private static Store ourInstance = new Store();
     public static float physicsScale = 0.05f;
     public Box2DDebugRenderer renderer;

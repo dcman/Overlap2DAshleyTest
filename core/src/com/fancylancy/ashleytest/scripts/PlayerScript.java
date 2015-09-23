@@ -1,6 +1,7 @@
 package com.fancylancy.ashleytest.scripts;
 
 import com.badlogic.ashley.core.Entity;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
@@ -17,6 +18,7 @@ import com.uwsoft.editor.renderer.utils.ComponentRetriever;
  * Created by SuckIt on 9/15/15.
  */
 public class PlayerScript implements IScript {
+    private final String tag = this.getClass().getSimpleName();
     private CirclePhysicsBodyComponent circlePhysicsBodyComponent;
     private TransformComponent transformComponent;
     private DimensionsComponent dimensionsComponent;
@@ -44,7 +46,6 @@ public class PlayerScript implements IScript {
         width = textureRegionComponent.region.getRegionWidth();
         position = new Vector2(transformComponent.x,transformComponent.y);
         entity.add(new CirclePhysicsBodyComponent(world, position, width));
-        //System.out.println(entity.getComponents());
         circlePhysicsBodyComponent = entity.getComponent(CirclePhysicsBodyComponent.class);
         batch = Store.getInstance().sceneLoader.getBatch();
 
@@ -75,7 +76,7 @@ public class PlayerScript implements IScript {
             temp = temp * -1;
             temp *= 50;
         }
-        System.out.println("Screen x " + screenX + " Force " + temp);
+        Gdx.app.debug(tag, "Screen x " + screenX + " Force " + temp);
         circlePhysicsBodyComponent.body.applyForceToCenter(temp, 5000, true);
     }
 }

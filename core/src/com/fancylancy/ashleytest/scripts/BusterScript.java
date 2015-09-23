@@ -20,6 +20,7 @@ import com.uwsoft.editor.renderer.utils.ComponentRetriever;
  * Created by SuckIt on 9/15/15.
  */
 public class BusterScript implements IScript {
+    private final String tag = this.getClass().getSimpleName();
     private final World world;
     private Entity entity;
     private TransformComponent transformComponent;
@@ -39,8 +40,7 @@ public class BusterScript implements IScript {
         atlas = "orig/pack.atlas";
         region = "exp";
         imageComponent = new ImageComponent(atlas, region);
-        System.out.println(this.hashCode() + " Im a Buster " + this.getClass());
-
+        Gdx.app.debug(tag, this.hashCode() + " Im a Buster " + this.getClass());
     }
 
 
@@ -49,8 +49,6 @@ public class BusterScript implements IScript {
         this.entity = entity;
         physicsBodyComponent = ComponentRetriever.get(entity,PhysicsBodyComponent.class);
         parentNodeComponent = ComponentRetriever.get(entity,ParentNodeComponent.class);
-        //System.out.println(parentNodeComponent.parentEntity.getComponents());
-
     }
 
     @Override
@@ -68,11 +66,11 @@ public class BusterScript implements IScript {
         batch.draw(imageComponent.region, pos.x / scale, pos.y / scale);
         batch.end();
 
-        System.out.println(this.hashCode() + " Buster: " + pos.y);
+        Gdx.app.debug(tag, this.hashCode() + " Buster: " + pos.y);
 
         if (pos.y <= -imageComponent.region.getRegionHeight()){
             engine.removeEntity(entity);
-            System.out.println(this.hashCode() + " Buster removed: " + pos.y);
+            Gdx.app.debug(tag, this.hashCode() + " Buster removed: " + pos.y);
         }
     }
 

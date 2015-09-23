@@ -12,6 +12,7 @@ import com.fancylancy.ashleytest.scripts.PlayerScript;
  * Created by SuckIt on 9/20/15.
  */
 public class uiStage extends Stage {
+    private final String tag = this.getClass().getSimpleName();
     PlayerScript playerScript;
     Batch batch;
     Texture tex;

@@ -9,14 +9,14 @@ import com.fancylancy.ashleytest.Store;
  * Created by SuckIt on 9/15/15.
  */
 public class CirclePhysicsBodyComponent implements Component {
+    private final String tag = this.getClass().getSimpleName();
+    private float scale = Store.physicsScale;
     public CircleShape circleShape;
     public FixtureDef fixture;
     public BodyDef bodyDef;
     public World world;
     public Body body;
     public int radius;
-    private float scale = Store.physicsScale;
-
 
     public CirclePhysicsBodyComponent(World world, Vector2 position, int width) {
         this.world = world;

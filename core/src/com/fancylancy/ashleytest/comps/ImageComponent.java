@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
  * Created by SuckIt on 9/15/15.
  */
 public class ImageComponent implements Component {
+    private final String tag = this.getClass().getSimpleName();
     public TextureAtlas atlas;
     public TextureRegion region;
 

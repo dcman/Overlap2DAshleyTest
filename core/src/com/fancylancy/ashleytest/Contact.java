@@ -9,10 +9,10 @@ import com.badlogic.ashley.core.Engine;
  * Created by SuckIt on 9/20/15.
  */
 public class Contact implements ContactListener {
+    private final String tag = this.getClass().getSimpleName();
     private Engine engine;
     public Contact(Engine engine) {
         this.engine = engine;
-        System.out.println(engine.getEntities());
     }
 
     @Override

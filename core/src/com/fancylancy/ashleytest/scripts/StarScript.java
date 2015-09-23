@@ -2,6 +2,7 @@ package com.fancylancy.ashleytest.scripts;
 
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Fixture;
@@ -19,6 +20,7 @@ import com.uwsoft.editor.renderer.utils.ComponentRetriever;
  * Created by SuckIt on 9/20/15.
  */
 public class StarScript implements IScript {
+    private final String tag = this.getClass().getSimpleName();
     private final World world;
     private Entity entity;
     private TransformComponent transformComponent;
@@ -38,8 +40,7 @@ public class StarScript implements IScript {
         atlas = "orig/pack.atlas";
         region = "star";
         imageComponent = new ImageComponent(atlas, region);
-        System.out.println(this.hashCode() + " Im a Star" + this.getClass());
-
+        Gdx.app.debug(tag, this.hashCode() + " " + this.getClass());
     }
 
 
@@ -48,8 +49,6 @@ public class StarScript implements IScript {
         this.entity = entity;
         physicsBodyComponent = ComponentRetriever.get(entity, PhysicsBodyComponent.class);
         parentNodeComponent = ComponentRetriever.get(entity,ParentNodeComponent.class);
-        //System.out.println(parentNodeComponent.parentEntity.getComponents());
-
     }
 
     @Override
@@ -66,11 +65,12 @@ public class StarScript implements IScript {
         batch.begin();
         batch.draw(imageComponent.region, pos.x / scale, pos.y / scale);
         batch.end();
-        System.out.println(this.hashCode() + " Star: " + pos.y);
+
+        Gdx.app.debug(tag, this.hashCode() + " Star: " + pos.y);
 
         if (pos.y <= -imageComponent.region.getRegionHeight()){
             engine.removeEntity(entity);
-            System.out.println(this.hashCode() + " Star removed: " + pos.y);
+            Gdx.app.debug(tag, this.hashCode() + " Star removed: " + pos.y);
         }
     }
 

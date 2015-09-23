@@ -2,6 +2,7 @@ package com.fancylancy.ashleytest;
 
 
 import com.badlogic.ashley.core.Engine;
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.FPSLogger;
@@ -15,6 +16,7 @@ import com.uwsoft.editor.renderer.SceneLoader;
 
 
 public class AshleyTest extends ApplicationAdapter {
+    private final String tag = this.getClass().getSimpleName();
     private Box2DDebugRenderer renderer;
     private World world;
     private Engine engine;
@@ -29,24 +31,17 @@ public class AshleyTest extends ApplicationAdapter {
 
     @Override
 	public void create () {
+        Gdx.app.setLogLevel(Application.LOG_DEBUG);
         fpsLogger = new FPSLogger();
         store = Store.getInstance();
-        System.out.println(store);
         sceneLoader = store.sceneLoader;
-        System.out.println(sceneLoader);
         viewport = store.viewport;
-        System.out.println(viewport);
         renderer = store.renderer;
-        System.out.println(renderer);
         world = sceneLoader.world;
-        System.out.println(world);
         engine = store.engine;
-        System.out.println(engine);
         root = new ItemWrapper(sceneLoader.getRoot());
         Store.getInstance().root = root;
-        System.out.println(root);
         player = root.getChild("ball");
-        System.out.println(player);
         store.player = player;
         world.setContactListener(new Contact(engine));
         playerScript = new PlayerScript(world);
