@@ -1,6 +1,9 @@
 package com.fancylancy.ashleytest.scripts;
 
+import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
+import com.badlogic.gdx.Application;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Fixture;
@@ -28,6 +31,7 @@ public class BusterScript implements IScript {
     private Batch batch = Store.getInstance().sceneLoader.getBatch();
     private Vector2 pos;
     private float scale = Store.physicsScale;
+    private Engine engine = Store.getInstance().engine;
     private boolean test = true;
 
     public BusterScript(World world) {
@@ -61,8 +65,15 @@ public class BusterScript implements IScript {
             test = false;
         }
         batch.begin();
-        batch.draw(imageComponent.region,pos.x / scale,pos.y / scale);
+        batch.draw(imageComponent.region, pos.x / scale, pos.y / scale);
         batch.end();
+
+        System.out.println(this.hashCode() + " Buster: " + pos.y);
+
+        if (pos.y <= -imageComponent.region.getRegionHeight()){
+            engine.removeEntity(entity);
+            System.out.println(this.hashCode() + " Buster removed: " + pos.y);
+        }
     }
 
     @Override

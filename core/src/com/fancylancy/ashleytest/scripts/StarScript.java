@@ -1,5 +1,6 @@
 package com.fancylancy.ashleytest.scripts;
 
+import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
@@ -29,6 +30,7 @@ public class StarScript implements IScript {
     private Batch batch = Store.getInstance().sceneLoader.getBatch();
     private Vector2 pos;
     private float scale = Store.physicsScale;
+    private Engine engine = Store.getInstance().engine;
     private boolean test = true;
 
     public StarScript(World world) {
@@ -62,8 +64,14 @@ public class StarScript implements IScript {
             test = false;
         }
         batch.begin();
-        batch.draw(imageComponent.region,pos.x / scale,pos.y / scale);
+        batch.draw(imageComponent.region, pos.x / scale, pos.y / scale);
         batch.end();
+        System.out.println(this.hashCode() + " Star: " + pos.y);
+
+        if (pos.y <= -imageComponent.region.getRegionHeight()){
+            engine.removeEntity(entity);
+            System.out.println(this.hashCode() + " Star removed: " + pos.y);
+        }
     }
 
     @Override
