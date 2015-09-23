@@ -54,7 +54,7 @@ public class Store extends AssetManager implements Disposable {
     public void createBurst(ItemWrapper root) {
         CompositeItemVO vo = sceneLoader.getRm().getProjectVO().libraryItems.get("burster");
         Entity e = sceneLoader.entityFactory.createEntity(root.getEntity(), vo);
-        e.getComponent(TransformComponent.class).x = 200;
+        e.getComponent(TransformComponent.class).x = MathUtils.random(10, 395);
         e.getComponent(TransformComponent.class).y = 800;
         engine.addEntity(e);
         buster = new ItemWrapper(e);
@@ -64,15 +64,15 @@ public class Store extends AssetManager implements Disposable {
     public void createStar(ItemWrapper root) {
         CompositeItemVO vo = sceneLoader.getRm().getProjectVO().libraryItems.get("star");
         Entity e = sceneLoader.entityFactory.createEntity(root.getEntity(), vo);
-        e.getComponent(TransformComponent.class).x = 250;
-        e.getComponent(TransformComponent.class).y = 850;
+        e.getComponent(TransformComponent.class).x = MathUtils.random(10, 395);
+        e.getComponent(TransformComponent.class).y = 800;
         engine.addEntity(e);
         star = new ItemWrapper(e);
         star.addScript(new StarScript(world));
     }
 
     public void add(ItemWrapper root) {
-        int temp = MathUtils.random(0,1);
+        int temp = MathUtils.random(0,2);
         if (temp == 0){
             createBurst(root);
         }
