@@ -26,7 +26,7 @@ public class AshleyTest extends ApplicationAdapter {
     private Store store;
     private float timeState;
     private FPSLogger fpsLogger;
-    private uiStage uiStage;
+    private uiHud uiHud;
     private PlayerScript playerScript;
 
     @Override
@@ -45,12 +45,12 @@ public class AshleyTest extends ApplicationAdapter {
         store.player = player;
         world.setContactListener(new Contact(engine));
         playerScript = new PlayerScript(world);
-        uiStage = new uiStage(viewport, sceneLoader.getBatch(), playerScript);
+        uiHud = new uiHud(viewport, sceneLoader.getBatch(), playerScript);
         init();
     }
 
     private void init() {
-        Gdx.input.setInputProcessor(uiStage);
+        Gdx.input.setInputProcessor(uiHud);
         player.addScript(playerScript);
     }
     public void addRandom(){
@@ -73,7 +73,7 @@ public class AshleyTest extends ApplicationAdapter {
 
         addRandom();
 
-        uiStage.act();
-        uiStage.draw();
+        uiHud.act();
+        uiHud.draw();
     }
 }

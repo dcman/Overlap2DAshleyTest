@@ -11,7 +11,7 @@ import com.fancylancy.ashleytest.scripts.PlayerScript;
 /**
  * Created by SuckIt on 9/20/15.
  */
-public class uiStage extends Stage {
+public class uiHud extends Stage {
     private final String tag = this.getClass().getSimpleName();
     PlayerScript playerScript;
     Batch batch;
@@ -26,7 +26,7 @@ public class uiStage extends Stage {
 //        batch.end();
     }
 
-    public uiStage(Viewport viewport, Batch batch, PlayerScript playerScript) {
+    public uiHud(Viewport viewport, Batch batch, PlayerScript playerScript) {
         super(viewport, batch);
         this.playerScript = playerScript;
         this.batch = batch;
