@@ -59,6 +59,7 @@ public class uiHud extends Stage {
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         Vector3 unProject = viewport.unproject(new Vector3(screenX, screenY, 0));
         playerScript.applyForce(unProject.x);
+        Store.getInstance().swoosh.play();
 //        x = unproject.x;
 //        y = unproject.y;
         return super.touchDown(screenX, screenY, pointer, button);

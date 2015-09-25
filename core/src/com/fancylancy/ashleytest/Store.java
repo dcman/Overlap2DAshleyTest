@@ -2,7 +2,10 @@ package com.fancylancy.ashleytest;
 
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
@@ -34,6 +37,7 @@ public class Store extends AssetManager implements Disposable {
     public FitViewport viewport;
     public ItemWrapper root;
     public Integer points;
+    public Sound pop, swoosh;
 
     public static Store getInstance() {
         return ourInstance;
@@ -46,6 +50,8 @@ public class Store extends AssetManager implements Disposable {
         sceneLoader.loadScene(scene, viewport);
         engine = sceneLoader.engine;
         points = 0;
+        pop = Gdx.audio.newSound(new FileHandle("pop.ogg"));
+        swoosh = Gdx.audio.newSound(new FileHandle("swoosh.ogg"));
     }
 
     public void createBurst(ItemWrapper root) {

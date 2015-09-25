@@ -24,11 +24,13 @@ public class Contact implements ContactListener {
                 Store.getInstance().points++;
                 Gdx.app.debug(tag,Store.getInstance().points.toString());
                 engine.removeEntity(Store.getInstance().star.getEntity());
+                Store.getInstance().pop.play();
             }
             if (contact.getFixtureB().getUserData() != null && contact.getFixtureB().getUserData().equals("Star")) {
                 Store.getInstance().points++;
                 Gdx.app.debug(tag, Store.getInstance().points.toString());
                 engine.removeEntity(Store.getInstance().star.getEntity());
+                Store.getInstance().pop.play();
             }
             if (contact.getFixtureA().getUserData() != null && contact.getFixtureA().getUserData().equals("Buster")) {
                 engine.removeEntity(Store.getInstance().buster.getEntity());
@@ -43,11 +45,13 @@ public class Contact implements ContactListener {
                 Store.getInstance().points++;
                 Gdx.app.debug(tag, Store.getInstance().points.toString());
                 engine.removeEntity(Store.getInstance().star.getEntity());
+                Store.getInstance().pop.play();
             }
             if (contact.getFixtureB().getUserData() != null && contact.getFixtureB().getUserData().equals("Star")) {
                 Store.getInstance().points++;
                 Gdx.app.debug(tag, Store.getInstance().points.toString());
                 engine.removeEntity(Store.getInstance().star.getEntity());
+                Store.getInstance().pop.play();
             }
             if (contact.getFixtureA().getUserData() != null && contact.getFixtureA().getUserData().equals("Buster")) {
                 engine.removeEntity(Store.getInstance().buster.getEntity());
