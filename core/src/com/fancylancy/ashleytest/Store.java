@@ -93,6 +93,8 @@ public class Store extends AssetManager implements Disposable {
 
     @Override
     public void dispose() {
-
+        renderer.dispose();
+        pop.dispose();
+        swoosh.dispose();
     }
 }

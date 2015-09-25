@@ -78,4 +78,11 @@ public class AshleyTest extends ApplicationAdapter {
         uiHud.act();
         uiHud.draw();
     }
+
+    @Override
+    public void dispose() {
+        super.dispose();
+        uiHud.dispose();
+        store.dispose();
+    }
 }
