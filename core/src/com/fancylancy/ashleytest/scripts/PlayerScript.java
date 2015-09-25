@@ -17,7 +17,7 @@ import com.uwsoft.editor.renderer.utils.ComponentRetriever;
  * Created by Justin Johnson on 9/15/15.
  * Script to modify the Player for this game.
  */
-public class PlayerScript implements IScript {
+public class PlayerScript implements IScript { 
     private final String tag = this.getClass().getSimpleName();
     private CirclePhysicsBodyComponent circlePhysicsBodyComponent;
     private TransformComponent transformComponent;
