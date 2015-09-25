@@ -5,9 +5,10 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 /**
- * Created by SuckIt on 9/15/15.
+ * Created by Justin Johnson on 9/15/15.
+ * Hacked together ImageComponent
  */
-public class ImageComponent implements Component {
+public class ImageComponent implements Component {//TODO not a real component
     private final String tag = this.getClass().getSimpleName();
     public TextureAtlas atlas;
     public TextureRegion region;
@@ -15,6 +16,5 @@ public class ImageComponent implements Component {
     public ImageComponent(String atl, String reg) {
         atlas = new TextureAtlas(atl);
         region = atlas.findRegion(reg);
-
     }
 }
