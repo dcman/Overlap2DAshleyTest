@@ -62,7 +62,7 @@ public class Store extends AssetManager implements Disposable {
         e.getComponent(TransformComponent.class).y = 800;
         engine.addEntity(e);
         buster = new ItemWrapper(e);
-        buster.addScript(new BusterScript(world));
+        buster.addScript(new BusterScript());
     }
 
     public void createStar(ItemWrapper root) {

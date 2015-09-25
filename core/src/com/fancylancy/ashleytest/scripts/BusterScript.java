@@ -2,7 +2,6 @@ package com.fancylancy.ashleytest.scripts;
 
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
-import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
@@ -21,10 +20,7 @@ import com.uwsoft.editor.renderer.utils.ComponentRetriever;
  */
 public class BusterScript implements IScript {
     private final String tag = this.getClass().getSimpleName();
-    private final World world;
     private Entity entity;
-    private TransformComponent transformComponent;
-    private DimensionsComponent dimensionsComponent;
     private PhysicsBodyComponent physicsBodyComponent;
     private ParentNodeComponent parentNodeComponent;
     private ImageComponent imageComponent;
@@ -33,13 +29,12 @@ public class BusterScript implements IScript {
     private Vector2 pos;
     private float scale = Store.physicsScale;
     private Engine engine = Store.getInstance().engine;
-    private boolean test = true;
+    private boolean fixPhysicsBodies = true;
 
-    public BusterScript(World world) {
-        this.world = world;
+    public BusterScript() {
         atlas = "orig/pack.atlas";
         region = "exp";
-        imageComponent = new ImageComponent(atlas, region);
+        imageComponent = new ImageComponent(atlas, region);//TODO not really a component
         Gdx.app.debug(tag, this.hashCode() + " Im a Buster " + this.getClass());
     }
 
@@ -53,22 +48,23 @@ public class BusterScript implements IScript {
 
     @Override
     public void act(float delta) {
-        pos = physicsBodyComponent.body.getPosition();
-        if(test){
+        pos = physicsBodyComponent.body.getPosition();//Get the location of the Physics body
+        if(fixPhysicsBodies){//Hack physicsBodyComponent.body needs time before you can access it
             for (int i = 0; i < physicsBodyComponent.body.getFixtureList().size; i++) {
+                //Convert bodies into sensors so they don't interact with other bodies
                 physicsBodyComponent.body.getFixtureList().get(i).setSensor(true);
                 Fixture fx = physicsBodyComponent.body.getFixtureList().get(i);
-                fx.setUserData("Buster");
+                fx.setUserData("Buster");//Used later in hit detection
             }
-            test = false;
+            fixPhysicsBodies = false;//Only loop once
         }
-        batch.begin();
+        batch.begin();//Hack CompositeItemVO have broken TextureRegionComponent
         batch.draw(imageComponent.region, pos.x / scale, pos.y / scale);
         batch.end();
 
         Gdx.app.debug(tag, this.hashCode() + " Buster: " + pos.y);
 
-        if (pos.y <= -imageComponent.region.getRegionHeight()){
+        if (pos.y <= -imageComponent.region.getRegionHeight()){//Remove the Entity when it is out of view
             engine.removeEntity(entity);
             Gdx.app.debug(tag, this.hashCode() + " Buster removed: " + pos.y);
         }
