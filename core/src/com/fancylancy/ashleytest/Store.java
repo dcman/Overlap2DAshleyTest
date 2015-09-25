@@ -9,12 +9,13 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.fancylancy.ashleytest.scripts.BusterScript;
-import com.fancylancy.ashleytest.scripts.PlayerScript;
 import com.fancylancy.ashleytest.scripts.StarScript;
 import com.uwsoft.editor.renderer.SceneLoader;
 import com.uwsoft.editor.renderer.components.TransformComponent;
 import com.uwsoft.editor.renderer.data.CompositeItemVO;
-import com.uwsoft.editor.renderer.scripts.IScript;
+import com.uwsoft.editor.renderer.data.ProjectInfoVO;
+import com.uwsoft.editor.renderer.resources.IResourceRetriever;
+import com.uwsoft.editor.renderer.scene2d.CompositeActor;
 import com.uwsoft.editor.renderer.utils.ItemWrapper;
 
 /**
@@ -31,9 +32,8 @@ public class Store extends AssetManager implements Disposable {
     public SceneLoader sceneLoader;
     public ItemWrapper player, buster, star;
     public FitViewport viewport;
-    public int score = 0;
     public ItemWrapper root;
-    public PlayerScript playerScript;
+    public Integer points;
 
     public static Store getInstance() {
         return ourInstance;
@@ -41,15 +41,11 @@ public class Store extends AssetManager implements Disposable {
 
     private Store() {
         sceneLoader = new SceneLoader();
-        viewport = new FitViewport(480,800);
+        viewport = new FitViewport(480, 800);
         renderer = new Box2DDebugRenderer();
         sceneLoader.loadScene(scene, viewport);
         engine = sceneLoader.engine;
-    }
-
-    @Override
-    public void dispose() {
-
+        points = 0;
     }
 
     public void createBurst(ItemWrapper root) {
@@ -72,13 +68,24 @@ public class Store extends AssetManager implements Disposable {
         star.addScript(new StarScript(world));
     }
 
+    public CompositeActor createLabe(IResourceRetriever ir) {
+        ProjectInfoVO projectInfo = ir.getProjectVO();
+        CompositeItemVO labelData = projectInfo.libraryItems.get("TextBox");
+        CompositeActor scoreActor = new CompositeActor(labelData, ir);
+        return scoreActor;
+    }
+
     public void add(ItemWrapper root) {
-        int temp = MathUtils.random(0,2);
-        if (temp == 0){
+        int temp = MathUtils.random(0, 2);
+        if (temp == 0) {
             createBurst(root);
-        }
-        else {
+        } else {
             createStar(root);
         }
+    }
+
+    @Override
+    public void dispose() {
+
     }
 }

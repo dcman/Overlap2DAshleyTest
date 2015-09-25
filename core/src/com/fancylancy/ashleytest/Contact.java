@@ -1,9 +1,10 @@
 package com.fancylancy.ashleytest;
 
+import com.badlogic.ashley.core.Engine;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Manifold;
-import com.badlogic.ashley.core.Engine;
 
 /**
  * Created by SuckIt on 9/20/15.
@@ -11,38 +12,47 @@ import com.badlogic.ashley.core.Engine;
 public class Contact implements ContactListener {
     private final String tag = this.getClass().getSimpleName();
     private Engine engine;
+
     public Contact(Engine engine) {
         this.engine = engine;
     }
 
     @Override
     public void beginContact(com.badlogic.gdx.physics.box2d.Contact contact) {
-        if (contact.getFixtureA().getUserData() != null && contact.getFixtureA().getUserData().equals("Ball")){
-            if (contact.getFixtureA().getUserData() != null && contact.getFixtureA().getUserData().equals("Star")){
+        if (contact.getFixtureA().getUserData() != null && contact.getFixtureA().getUserData().equals("Ball")) {
+            if (contact.getFixtureA().getUserData() != null && contact.getFixtureA().getUserData().equals("Star")) {
+                Store.getInstance().points++;
+                Gdx.app.debug(tag,Store.getInstance().points.toString());
                 engine.removeEntity(Store.getInstance().star.getEntity());
             }
-            if (contact.getFixtureB().getUserData() != null && contact.getFixtureB().getUserData().equals("Star")){
+            if (contact.getFixtureB().getUserData() != null && contact.getFixtureB().getUserData().equals("Star")) {
+                Store.getInstance().points++;
+                Gdx.app.debug(tag, Store.getInstance().points.toString());
                 engine.removeEntity(Store.getInstance().star.getEntity());
             }
-            if (contact.getFixtureA().getUserData() != null && contact.getFixtureA().getUserData().equals("Buster")){
+            if (contact.getFixtureA().getUserData() != null && contact.getFixtureA().getUserData().equals("Buster")) {
                 engine.removeEntity(Store.getInstance().buster.getEntity());
             }
-            if (contact.getFixtureB().getUserData() != null && contact.getFixtureB().getUserData().equals("Buster")){
+            if (contact.getFixtureB().getUserData() != null && contact.getFixtureB().getUserData().equals("Buster")) {
                 engine.removeEntity(Store.getInstance().buster.getEntity());
             }
         }
 
-        if (contact.getFixtureB().getUserData() != null && contact.getFixtureB().getUserData().equals("Ball")){
-            if (contact.getFixtureA().getUserData() != null && contact.getFixtureA().getUserData().equals("Star")){
+        if (contact.getFixtureB().getUserData() != null && contact.getFixtureB().getUserData().equals("Ball")) {
+            if (contact.getFixtureA().getUserData() != null && contact.getFixtureA().getUserData().equals("Star")) {
+                Store.getInstance().points++;
+                Gdx.app.debug(tag, Store.getInstance().points.toString());
                 engine.removeEntity(Store.getInstance().star.getEntity());
             }
-            if (contact.getFixtureB().getUserData() != null && contact.getFixtureB().getUserData().equals("Star")){
+            if (contact.getFixtureB().getUserData() != null && contact.getFixtureB().getUserData().equals("Star")) {
+                Store.getInstance().points++;
+                Gdx.app.debug(tag, Store.getInstance().points.toString());
                 engine.removeEntity(Store.getInstance().star.getEntity());
             }
-            if (contact.getFixtureA().getUserData() != null && contact.getFixtureA().getUserData().equals("Buster")){
+            if (contact.getFixtureA().getUserData() != null && contact.getFixtureA().getUserData().equals("Buster")) {
                 engine.removeEntity(Store.getInstance().buster.getEntity());
             }
-            if (contact.getFixtureB().getUserData() != null && contact.getFixtureB().getUserData().equals("Buster")){
+            if (contact.getFixtureB().getUserData() != null && contact.getFixtureB().getUserData().equals("Buster")) {
                 engine.removeEntity(Store.getInstance().buster.getEntity());
             }
         }

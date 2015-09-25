@@ -11,8 +11,8 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.fancylancy.ashleytest.scripts.PlayerScript;
-import com.uwsoft.editor.renderer.utils.ItemWrapper;
 import com.uwsoft.editor.renderer.SceneLoader;
+import com.uwsoft.editor.renderer.utils.ItemWrapper;
 
 
 public class AshleyTest extends ApplicationAdapter {
@@ -30,8 +30,8 @@ public class AshleyTest extends ApplicationAdapter {
     private PlayerScript playerScript;
 
     @Override
-	public void create () {
-        Gdx.app.setLogLevel(Application.LOG_DEBUG);
+    public void create() {
+        Gdx.app.setLogLevel(Application.LOG_NONE);
         fpsLogger = new FPSLogger();
         store = Store.getInstance();
         sceneLoader = store.sceneLoader;
@@ -45,7 +45,7 @@ public class AshleyTest extends ApplicationAdapter {
         store.player = player;
         world.setContactListener(new Contact(engine));
         playerScript = new PlayerScript(world);
-        uiHud = new uiHud(viewport, sceneLoader.getBatch(), playerScript);
+        uiHud = new uiHud(viewport, sceneLoader.getBatch(), playerScript, sceneLoader.getRm());
         init();
     }
 
@@ -53,20 +53,22 @@ public class AshleyTest extends ApplicationAdapter {
         Gdx.input.setInputProcessor(uiHud);
         player.addScript(playerScript);
     }
-    public void addRandom(){
-        timeState+=Gdx.graphics.getDeltaTime();
-        if(timeState>=3f){
+
+    public void addRandom() {
+        timeState += Gdx.graphics.getDeltaTime();
+        if (timeState >= 3f) {
             store.add(root);
-            timeState=0f; // reset our timer
+            timeState = 0f; // reset our timer
         }
 
     }
+
     @Override
-    public void render () {
+    public void render() {
         fpsLogger.log();
 
-		Gdx.gl.glClearColor(0, 0, 0, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         sceneLoader.getEngine().update(Gdx.graphics.getDeltaTime());
         renderer.render(world, viewport.getCamera().combined);
