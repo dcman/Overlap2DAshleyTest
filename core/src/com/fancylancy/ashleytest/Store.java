@@ -39,6 +39,7 @@ public class Store extends AssetManager implements Disposable {
     public Integer points;
     public Sound pop, swoosh;
 
+
     public static Store getInstance() {
         return ourInstance;
     }
@@ -50,8 +51,8 @@ public class Store extends AssetManager implements Disposable {
         sceneLoader.loadScene(scene, viewport);
         engine = sceneLoader.engine;
         points = 0;
-        pop = Gdx.audio.newSound(new FileHandle("pop.ogg"));
-        swoosh = Gdx.audio.newSound(new FileHandle("swoosh.ogg"));
+        pop = Gdx.audio.newSound(Gdx.files.internal("pop.ogg"));
+        swoosh = Gdx.audio.newSound(Gdx.files.internal("swoosh.ogg"));
     }
 
     public void createBurst(ItemWrapper root) {
