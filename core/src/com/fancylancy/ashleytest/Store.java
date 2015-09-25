@@ -72,7 +72,7 @@ public class Store extends AssetManager implements Disposable {
         e.getComponent(TransformComponent.class).y = 800;
         engine.addEntity(e);
         star = new ItemWrapper(e);
-        star.addScript(new StarScript(world));
+        star.addScript(new StarScript());
     }
 
     public CompositeActor createLabe(IResourceRetriever ir) {
