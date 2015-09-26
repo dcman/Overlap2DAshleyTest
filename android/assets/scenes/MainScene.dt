@@ -1,1 +1,174 @@
-{"sceneName":"MainScene","composite":{"sImages":[{"uniqueId":4,"itemIdentifier":"ball","tags":[],"originX":43.5,"originY":43,"layerName":"Default","imageName":"Ball"}],"layers":[{"layerName":"Default","isVisible":true}]},"physicsPropertiesVO":{},"verticalGuides":[239.99988,-240.00006],"horizontalGuides":[-400,399.99988]}
+{
+sceneName: MainScene
+composite: {
+	sImages: [
+		{
+			uniqueId: 2
+			itemIdentifier: bottom
+			tags: []
+			y: -20
+			originX: 240
+			originY: 10
+			layerName: Default
+			shape: {
+				polygons: [
+					[
+						{}
+						{
+							y: 20
+						}
+						{
+							x: 480
+							y: 20
+						}
+						{
+							x: 480
+						}
+					]
+				]
+			}
+			physics: {
+				mass: 1
+				allowSleep: true
+				awake: true
+				friction: 0.2
+				restitution: 0.5
+			}
+			imageName: b-bar
+			isRepeat: true
+		}
+		{
+			uniqueId: 3
+			itemIdentifier: left
+			tags: []
+			x: -19
+			originX: 10
+			originY: 400
+			zIndex: 1
+			layerName: Default
+			shape: {
+				polygons: [
+					[
+						{}
+						{
+							y: 800
+						}
+						{
+							x: 20
+							y: 800
+						}
+						{
+							x: 20
+						}
+					]
+				]
+			}
+			physics: {
+				mass: 1
+				allowSleep: true
+				awake: true
+				friction: 0.2
+				restitution: 0.5
+			}
+			imageName: bar
+			isRepeat: true
+		}
+		{
+			uniqueId: 4
+			itemIdentifier: right
+			tags: []
+			x: 479
+			originX: 10
+			originY: 400
+			zIndex: 2
+			layerName: Default
+			shape: {
+				polygons: [
+					[
+						{}
+						{
+							y: 800
+						}
+						{
+							x: 20
+							y: 800
+						}
+						{
+							x: 20
+						}
+					]
+				]
+			}
+			physics: {
+				mass: 1
+				allowSleep: true
+				awake: true
+				friction: 0.2
+				restitution: 0.5
+			}
+			imageName: bar
+			isRepeat: true
+		}
+		{
+			uniqueId: 5
+			itemIdentifier: ball
+			tags: []
+			x: 188
+			y: 434
+			originX: 43.5
+			originY: 43
+			zIndex: 3
+			layerName: Default
+			imageName: sun
+		}
+		{
+			uniqueId: 6
+			itemIdentifier: topbar
+			tags: []
+			y: 799
+			originX: 240
+			originY: 10
+			zIndex: 4
+			layerName: Default
+			shape: {
+				polygons: [
+					[
+						{}
+						{
+							y: 20
+						}
+						{
+							x: 480
+							y: 20
+						}
+						{
+							x: 480
+						}
+					]
+				]
+			}
+			physics: {
+				mass: 1
+				allowSleep: true
+				awake: true
+				friction: 0.2
+				restitution: 0.5
+			}
+			imageName: b-bar
+			isRepeat: true
+		}
+	]
+	layers: [
+		{
+			layerName: Default
+			isVisible: true
+		}
+	]
+}
+physicsPropertiesVO: {
+	gravityY: -9.8
+	enabled: true
+}
+verticalGuides: [ -0.62506104, 480.37488 ]
+horizontalGuides: [ 800.12494, -0.87506104 ]
+}
