@@ -31,7 +31,7 @@ public class AshleyTest extends ApplicationAdapter {
 
     @Override
     public void create() {
-        Gdx.app.setLogLevel(Application.LOG_DEBUG);
+        Gdx.app.setLogLevel(Application.LOG_NONE);
         fpsLogger = new FPSLogger();
         store = Store.getInstance();
         sceneLoader = store.sceneLoader;

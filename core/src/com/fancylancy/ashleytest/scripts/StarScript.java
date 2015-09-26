@@ -3,14 +3,24 @@ package com.fancylancy.ashleytest.scripts;
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Fixture;
+import com.badlogic.gdx.utils.Json;
 import com.fancylancy.ashleytest.Store;
 import com.fancylancy.ashleytest.comps.ImageComponent;
+import com.uwsoft.editor.renderer.SceneLoader;
+import com.uwsoft.editor.renderer.components.MainItemComponent;
+import com.uwsoft.editor.renderer.components.ZIndexComponent;
 import com.uwsoft.editor.renderer.components.physics.PhysicsBodyComponent;
+import com.uwsoft.editor.renderer.data.MainItemVO;
+import com.uwsoft.editor.renderer.data.SimpleImageVO;
+import com.uwsoft.editor.renderer.factory.component.SimpleImageComponentFactory;
 import com.uwsoft.editor.renderer.scripts.IScript;
 import com.uwsoft.editor.renderer.utils.ComponentRetriever;
+
+import java.io.File;
 
 /**
  * Created by Justin Johnson on 9/20/15.
@@ -27,10 +37,16 @@ public class StarScript implements IScript {
     private float scale = Store.physicsScale;
     private Engine engine = Store.getInstance().engine;
     private boolean fixPhysicsBodies = true;
-
+    private SimpleImageVO simpleImageVO;
+    private SceneLoader sceneLoader = Store.getInstance().sceneLoader;
+    private SimpleImageComponentFactory simpleImageComponentFactory;
+    private ZIndexComponent zIndexComponent;
     public StarScript() {
         atlas = "orig/pack.atlas";
         region = "star";
+//        simpleImageVO = new SimpleImageVO();
+//        simpleImageVO.imageName = "star";
+//        simpleImageComponentFactory = new SimpleImageComponentFactory(sceneLoader.rayHandler, Store.getInstance().world,sceneLoader.getRm());
         imageComponent = new ImageComponent(atlas, region);//TODO not really a component
         Gdx.app.debug(tag, this.hashCode() + " " + this.getClass());
     }
@@ -40,6 +56,16 @@ public class StarScript implements IScript {
     public void init(Entity entity) {
         this.entity = entity;
         physicsBodyComponent = ComponentRetriever.get(entity, PhysicsBodyComponent.class);
+//        System.out.println(entity.getComponents());
+//        simpleImageComponentFactory.createComponents(sceneLoader.getRoot(),entity,simpleImageVO);
+//        zIndexComponent = ComponentRetriever.get(entity, ZIndexComponent.class);
+//        zIndexComponent.setZIndex(3);
+//        System.out.println(entity.getComponents());
+//        Json j = new Json();
+//        FileHandle file = Gdx.files.internal("project.dt");
+//        System.out.println(j.prettyPrint(file.readString()));
+//        file =  Gdx.files.internal("scenes/MainScene.dt");
+//        System.out.println(j.prettyPrint(file.readString()));
     }
 
     @Override
@@ -71,3 +97,22 @@ public class StarScript implements IScript {
 
     }
 }
+/*
+			uniqueId: 5
+			itemIdentifier: ball
+			tags: []
+			x: 188
+			y: 434
+			originX: 43.5
+			originY: 43
+			zIndex: 3
+			layerName: Default
+			imageName: sun
+
+					uniqueId: 6
+					tags: []
+					originX: 36
+					originY: 35.5
+					layerName: Default
+					imageName: exp
+ */
