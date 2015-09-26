@@ -37,16 +37,10 @@ public class StarScript implements IScript {
     private float scale = Store.physicsScale;
     private Engine engine = Store.getInstance().engine;
     private boolean fixPhysicsBodies = true;
-    private SimpleImageVO simpleImageVO;
-    private SceneLoader sceneLoader = Store.getInstance().sceneLoader;
-    private SimpleImageComponentFactory simpleImageComponentFactory;
-    private ZIndexComponent zIndexComponent;
+
     public StarScript() {
         atlas = "orig/pack.atlas";
         region = "star";
-//        simpleImageVO = new SimpleImageVO();
-//        simpleImageVO.imageName = "star";
-//        simpleImageComponentFactory = new SimpleImageComponentFactory(sceneLoader.rayHandler, Store.getInstance().world,sceneLoader.getRm());
         imageComponent = new ImageComponent(atlas, region);//TODO not really a component
         Gdx.app.debug(tag, this.hashCode() + " " + this.getClass());
     }
@@ -56,16 +50,6 @@ public class StarScript implements IScript {
     public void init(Entity entity) {
         this.entity = entity;
         physicsBodyComponent = ComponentRetriever.get(entity, PhysicsBodyComponent.class);
-//        System.out.println(entity.getComponents());
-//        simpleImageComponentFactory.createComponents(sceneLoader.getRoot(),entity,simpleImageVO);
-//        zIndexComponent = ComponentRetriever.get(entity, ZIndexComponent.class);
-//        zIndexComponent.setZIndex(3);
-//        System.out.println(entity.getComponents());
-//        Json j = new Json();
-//        FileHandle file = Gdx.files.internal("project.dt");
-//        System.out.println(j.prettyPrint(file.readString()));
-//        file =  Gdx.files.internal("scenes/MainScene.dt");
-//        System.out.println(j.prettyPrint(file.readString()));
     }
 
     @Override
