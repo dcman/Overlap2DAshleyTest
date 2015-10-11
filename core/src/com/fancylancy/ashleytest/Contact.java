@@ -34,9 +34,11 @@ public class Contact implements ContactListener {
             }
             if (contact.getFixtureA().getUserData() != null && contact.getFixtureA().getUserData().equals("Buster")) {
                 engine.removeEntity(Store.getInstance().buster.getEntity());
+                Store.getInstance().end.play();
             }
             if (contact.getFixtureB().getUserData() != null && contact.getFixtureB().getUserData().equals("Buster")) {
                 engine.removeEntity(Store.getInstance().buster.getEntity());
+                Store.getInstance().end.play();
             }
         }
 
@@ -55,9 +57,11 @@ public class Contact implements ContactListener {
             }
             if (contact.getFixtureA().getUserData() != null && contact.getFixtureA().getUserData().equals("Buster")) {
                 engine.removeEntity(Store.getInstance().buster.getEntity());
+                Store.getInstance().end.play();
             }
             if (contact.getFixtureB().getUserData() != null && contact.getFixtureB().getUserData().equals("Buster")) {
                 engine.removeEntity(Store.getInstance().buster.getEntity());
+                Store.getInstance().end.play();
             }
         }
 
