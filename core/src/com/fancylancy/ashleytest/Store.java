@@ -21,6 +21,8 @@ import com.uwsoft.editor.renderer.resources.IResourceRetriever;
 import com.uwsoft.editor.renderer.scene2d.CompositeActor;
 import com.uwsoft.editor.renderer.utils.ItemWrapper;
 
+import java.util.HashMap;
+
 /**
  * Created by SuckIt on 9/20/15.
  */
@@ -33,7 +35,8 @@ public class Store extends AssetManager implements Disposable {
     public World world;
     public Engine engine;
     public SceneLoader sceneLoader;
-    public ItemWrapper player, buster, star;
+    public ItemWrapper player;
+    public HashMap<Long,ItemWrapper> busters, stars;
     public FitViewport viewport;
     public ItemWrapper root;
     public Integer points;
@@ -54,10 +57,13 @@ public class Store extends AssetManager implements Disposable {
         pop = Gdx.audio.newSound(Gdx.files.internal("pop.ogg"));
         swoosh = Gdx.audio.newSound(Gdx.files.internal("swoosh.ogg"));
         end = Gdx.audio.newSound(Gdx.files.internal("over.ogg"));
+        busters = new HashMap<Long, ItemWrapper>();
+        stars = new HashMap<Long, ItemWrapper>();
 
     }
 
     public void createBurst(ItemWrapper root) {
+        ItemWrapper buster;
         CompositeItemVO vo = sceneLoader.getRm().getProjectVO().libraryItems.get("burster");
         Entity e = sceneLoader.entityFactory.createEntity(root.getEntity(), vo);
         e.getComponent(TransformComponent.class).x = MathUtils.random(10, 395);
@@ -65,9 +71,19 @@ public class Store extends AssetManager implements Disposable {
         engine.addEntity(e);
         buster = new ItemWrapper(e);
         buster.addScript(new BusterScript());
+        busters.put(buster.getEntity().getId(), buster);
+    }
+
+    public void removeBuster(String sid){
+        Long id = Long.parseLong(sid);
+        ItemWrapper buster = busters.remove(id);
+        if (buster != null){
+            engine.removeEntity(buster.getEntity());
+        }
     }
 
     public void createStar(ItemWrapper root) {
+        ItemWrapper star;
         CompositeItemVO vo = sceneLoader.getRm().getProjectVO().libraryItems.get("star");
         Entity e = sceneLoader.entityFactory.createEntity(root.getEntity(), vo);
         e.getComponent(TransformComponent.class).x = MathUtils.random(10, 395);
@@ -75,6 +91,15 @@ public class Store extends AssetManager implements Disposable {
         engine.addEntity(e);
         star = new ItemWrapper(e);
         star.addScript(new StarScript());
+        stars.put(star.getEntity().getId(),star);
+    }
+
+    public void removeStar(String sid){
+        Long id = Long.parseLong(sid);
+        ItemWrapper star = stars.remove(id);
+        if(star != null){
+            engine.removeEntity(star.getEntity());
+        }
     }
 
     public CompositeActor createLabe(IResourceRetriever ir) {

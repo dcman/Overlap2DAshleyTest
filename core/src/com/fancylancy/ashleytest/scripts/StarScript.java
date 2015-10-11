@@ -50,6 +50,7 @@ public class StarScript implements IScript {
     public void init(Entity entity) {
         this.entity = entity;
         physicsBodyComponent = ComponentRetriever.get(entity, PhysicsBodyComponent.class);
+        System.out.println(entity.getId());
     }
 
     @Override
@@ -60,7 +61,7 @@ public class StarScript implements IScript {
                 //Convert bodies into sensors so they don't interact with other bodies
                 physicsBodyComponent.body.getFixtureList().get(i).setSensor(true);
                 Fixture fx = physicsBodyComponent.body.getFixtureList().get(i);
-                fx.setUserData("Star");//Used later in hit detection
+                fx.setUserData("Star," + entity.getId());//Used later in hit detection
             }
             fixPhysicsBodies = false;//Only loop once
         }

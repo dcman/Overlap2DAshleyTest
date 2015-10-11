@@ -44,6 +44,7 @@ public class BusterScript implements IScript {
         this.entity = entity;
         physicsBodyComponent = ComponentRetriever.get(entity,PhysicsBodyComponent.class);
         parentNodeComponent = ComponentRetriever.get(entity,ParentNodeComponent.class);
+        System.out.println(entity.getId());
     }
 
     @Override
@@ -54,7 +55,7 @@ public class BusterScript implements IScript {
                 //Convert bodies into sensors so they don't interact with other bodies
                 physicsBodyComponent.body.getFixtureList().get(i).setSensor(true);
                 Fixture fx = physicsBodyComponent.body.getFixtureList().get(i);
-                fx.setUserData("Buster");//Used later in hit detection
+                fx.setUserData("Buster," + entity.getId());//Used later in hit detection
             }
             fixPhysicsBodies = false;//Only loop once
         }

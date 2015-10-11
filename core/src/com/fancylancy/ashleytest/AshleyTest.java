@@ -31,7 +31,7 @@ public class AshleyTest extends ApplicationAdapter {
 
     @Override
     public void create() {
-        Gdx.app.setLogLevel(Application.LOG_NONE);
+        Gdx.app.setLogLevel(Application.LOG_DEBUG);
         fpsLogger = new FPSLogger();
         store = Store.getInstance();
         sceneLoader = store.sceneLoader;
@@ -56,7 +56,7 @@ public class AshleyTest extends ApplicationAdapter {
 
     public void addRandom() {
         timeState += Gdx.graphics.getDeltaTime();
-        if (timeState >= 3f) {
+        if (timeState >= 1f) {
             store.add(root);
             timeState = 0f; // reset our timer
         }
